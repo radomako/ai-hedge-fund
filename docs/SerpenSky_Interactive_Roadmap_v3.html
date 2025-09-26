@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SerpenSky — Interactive Plan v3</title>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#121735; --muted:#9fb4d3; --brand:#007FFF; /* Serpens Blue */
+    --accent:#22c55e; --warn:#f59e0b; --error:#ef4444; --ink:#ecf3ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:14px/1.5 "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+  header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #24365f;background:linear-gradient(180deg,#0d132a 0%,#0b1020 100%)}
+  header h1{margin:0;font-size:18px;font-weight:700;letter-spacing:.2px}
+  nav button{background:#0e1b39;color:var(--ink);border:1px solid #1b3966;border-radius:10px;padding:8px 12px;cursor:pointer}
+  nav button.active{background:var(--brand);border-color:var(--brand);color:white}
+  main{padding:18px;max-width:1200px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .card{grid-column:span 4;background:var(--panel);border:1px solid #1b2a52;border-radius:14px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,.25)}
+  .card h3{margin:0 0 6px;font-size:16px;color:#cfe6ff}
+  .sub{color:var(--muted);font-size:12px;margin-left:6px}
+  ul{margin:8px 0 0 18px;padding:0}
+  li{margin:4px 0}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .panel{background:var(--panel);border:1px solid #1b2a52;border-radius:14px;padding:14px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .kpi{background:#0f1533;border:1px solid #1b2a52;border-radius:12px;padding:10px}
+  .kpi b{display:block;font-size:18px}
+  .muted{color:var(--muted)}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  select,input[type=range],input[type=text],input[type=number],textarea{background:#0f1533;color:var(--ink);border:1px solid #1b2a52;border-radius:8px;padding:6px}
+  .tiny{font-size:12px;color:var(--muted)}
+  .tab{display:none}
+  .tab.active{display:block}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid #334; color:#cfe}
+  .legend{display:flex;gap:10px;flex-wrap:wrap}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:10px;height:10px;border-radius:2px;display:inline-block}
+  canvas{width:100%;height:180px;background:#0c122b;border-radius:10px}
+  .tabs{display:flex;gap:8px;margin-top:8px}
+  .tabs button{background:#0e1b39;border:1px solid #1b3966;color:#cfe6ff;border-radius:8px;padding:6px 10px;cursor:pointer}
+  .tabs button.active{background:var(--brand);border-color:var(--brand);color:white}
+  .snap-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+  .snap{grid-column:span 4;background:#0f1533;border:1px solid #1b2a52;border-radius:10px;padding:10px}
+  .snap label{display:block;font-size:12px;color:#9fb4d3;margin:6px 0 2px}
+  .btn{background:var(--brand);color:#fff;border:1px solid var(--brand);border-radius:8px;padding:8px 12px;cursor:pointer}
+  @media (max-width:900px){ .card{grid-column:span 6} .kpis{grid-template-columns:repeat(2,1fr)} .snap{grid-column:span 6} }
+  @media (max-width:600px){ .card{grid-column:span 12} .kpis{grid-template-columns:1fr} .snap{grid-column:span 12} }
+</style>
+</head>
+<body>
+  <header>
+    <h1>SerpenSky — Interactive Plan (v3)</h1>
+    <nav class="row">
+      <button class="tabbtn active" data-t="roadmap">Roadmap</button>
+      <button class="tabbtn" data-t="concept">Conceptual Overview</button>
+      <button class="tabbtn" data-t="phases">3 / 6 / 12 / 24‑Month Run</button>
+      <button class="tabbtn" data-t="metrics">Interactive Metrics</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ROADMAP -->
+    <section id="roadmap" class="tab active">
+      <div class="grid">
+        <div class="card"><h3>Launch Setup <span class="sub">(Q1–Q2 2025)</span></h3>
+          <ul><li>Regulatory approvals</li><li>SIM preparation</li><li>MTN &amp; Cari Finance integration</li><li>Runner hiring &amp; training</li></ul></div>
+        <div class="card"><h3>Market Launch <span class="sub">(Q3 2025)</span></h3>
+          <ul><li>Kumasi go‑live</li><li>100+ runners &amp; kiosks</li><li>$169K GTM campaign</li><li>Target: 20K users onboarded</li></ul></div>
+        <div class="card"><h3>Optimization <span class="sub">(Q4 2025)</span></h3>
+          <ul><li>Retention &amp; referral programs</li><li>Loyalty tiers</li><li>Data rollover</li><li>Scale to 200K+ readiness</li></ul></div>
+        <div class="card"><h3>Urban Expansion <span class="sub">(Q1 2026)</span></h3>
+          <ul><li>Takoradi &amp; rural districts</li><li>Enterprise pilots</li><li>Tamale &amp; Cape Coast</li></ul></div>
+        <div class="card"><h3>Regional Growth <span class="sub">(Q3 2026)</span></h3>
+          <ul><li>CI, TZ, NA, UG, ZW expansion</li><li>Secondary cities rollout</li><li>Intl partnerships</li></ul></div>
+        <div class="card"><h3>Smart City Pilots <span class="sub">(Q4 2026)</span></h3>
+          <ul><li>IoT &amp; education bundles</li><li>Gov/NGO/telecom partnerships</li><li>Infra deployments</li></ul></div>
+      </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section id="concept" class="tab">
+      <div class="grid">
+        <div class="card"><h3>Problems Identified</h3>
+          <ul><li>High costs &amp; unreliable internet</li><li>Rural/peri‑urban exclusion</li><li>Economic &amp; educational setbacks</li><li>Weak infra</li></ul></div>
+        <div class="card"><h3>Solutions Offered</h3>
+          <ul><li>Hybrid satellite–fibre broadband</li><li>AI‑optimised network</li><li>Flexible plans</li><li>Community distribution</li></ul></div>
+        <div class="card"><h3>Technology Infrastructure</h3>
+          <ul><li>Starlink; YahSat/OneWeb expansion</li><li>MTN cellular integration</li><li>Cari Finance payments</li></ul></div>
+        <div class="card"><h3>Market Strategy</h3>
+          <ul><li>Runner networks &amp; kiosks</li><li>Digital marketing</li><li>Zero‑rated education</li><li>Community engagement</li></ul></div>
+        <div class="card"><h3>Financial Model</h3>
+          <ul><li>Daily/weekly/monthly plans</li><li>Transaction fees via Cari</li><li>Institutional contracts</li><li>Infra &amp; OPEX</li></ul></div>
+        <div class="card"><h3>Vision &amp; Impact Goals</h3>
+          <ul><li>Connect 2.5M+ Ghanaians</li><li>500+ jobs</li><li>1,500+ engagements</li><li>$20M+ digital tx</li></ul></div>
+      </div>
+    </section>
+
+    <!-- PHASES -->
+    <section id="phases" class="tab">
+      <div class="panel">
+        <div class="controls">
+          <label>Horizon:
+            <select id="horizon">
+              <option value="3">3 months</option>
+              <option value="6" selected>6 months</option>
+              <option value="12">12 months</option>
+              <option value="24">24 months</option>
+            </select>
+          </label>
+          <span class="pill">Layers: Ops • Network • Growth • Finance • People • Compliance • Partnerships • Impact</span>
+        </div>
+      </div>
+      <div id="phaseCards" class="grid" style="margin-top:12px"></div>
+    </section>
+
+    <!-- METRICS -->
+    <section id="metrics" class="tab">
+      <div class="panel row" style="align-items:center;justify-content:space-between">
+        <div class="controls">
+          <label>Scenario:
+            <select id="scenario">
+              <option value="base" selected>Base (20k users @ 12m)</option>
+              <option value="stretch">Stretch (30k @ 12m)</option>
+              <option value="conservative">Conservative (12k @ 12m)</option>
+            </select>
+          </label>
+          <label>ARPU ($): <input id="arpu" type="range" min="2" max="12" value="5"/></label>
+          <span class="tiny" id="arpuVal">$5</span>
+        </div>
+        <div class="legend">
+          <span><i class="sw" style="background:var(--brand)"></i> Users</span>
+          <span><i class="sw" style="background:var(--accent)"></i> MRR</span>
+          <span><i class="sw" style="background:var(--warn)"></i> CAC</span>
+        </div>
+      </div>
+
+      <div class="kpis" style="margin-top:12px">
+        <div class="kpi"><span class="muted">Users (EoM)</span><b id="kUsers">—</b></div>
+        <div class="kpi"><span class="muted">MRR</span><b id="kMRR">—</b></div>
+        <div class="kpi"><span class="muted">CAC Payback</span><b id="kPayback">—</b></div>
+        <div class="kpi"><span class="muted">Churn</span><b id="kChurn">—</b></div>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card" style="grid-column:span 6">
+          <h3>Users vs MRR (line)</h3>
+          <canvas id="line"></canvas>
+        </div>
+        <div class="card" style="grid-column:span 3">
+          <h3>Plan Mix (donut)</h3>
+          <canvas id="donut"></canvas>
+          <div class="tiny muted">Daily / Weekly / Monthly mix</div>
+        </div>
+        <div class="card" style="grid-column:span 3">
+          <h3>Budget Allocation (bars)</h3>
+          <canvas id="bars"></canvas>
+          <div class="tiny muted">Infra • GTM • Ops • R&amp;D • Buffer</div>
+        </div>
+      </div>
+
+      <!-- SNAPSHOTS -->
+      <div class="panel" style="margin-top:12px">
+        <div class="tabs">
+          <button class="snapbtn active" data-snap="m3">3‑Month</button>
+          <button class="snapbtn" data-snap="m6">6‑Month</button>
+          <button class="snapbtn" data-snap="m12">12‑Month</button>
+          <button id="sync" class="btn" style="margin-left:auto">Sync from Live</button>
+          <button id="exportJson" class="btn">Export JSON</button>
+        </div>
+        <div id="snapWrap" class="snap-grid" style="margin-top:8px"></div>
+        <textarea id="jsonOut" rows="10" style="width:100%;margin-top:10px" placeholder="Exported JSON will appear here…"></textarea>
+      </div>
+    </section>
+  </main>
+
+<script>
+// -------- Tabs --------
+document.querySelectorAll('.tabbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.t).classList.add('active');
+  });
+});
+
+// -------- Phase data --------
+const phaseData = {
+  3: [
+    {title:'Ops Readiness', items:['NCA permits finalized','SIM inventory secured','Runner cohort 1 hired & trained','Support desk playbooks']},
+    {title:'Network & Product', items:['Starlink PoC QoS baselines','Billing v1 + Cari Finance','Kiosk HW QA','App onboarding v1']},
+    {title:'Growth', items:['Neighborhood ambassadors','Founding‑user referrals','Zero‑rated edu pilot','First GTM sprints']},
+    {title:'Finance', items:['Pricing + discount matrix','Unit economics v1','Vendor terms & escrow','12‑week cash plan']},
+    {title:'People & Org', items:['Safety & field protocols','Runner scheduling system','Hiring plan (next 3 mo)','Culture doc v1']},
+    {title:'Compliance', items:['KYC/AML with partners','Data privacy stance','SLA templates','Incident reporting v1']},
+    {title:'Partnerships', items:['MTN integration scope','Municipal MoUs drafted','School & clinic shortlist','Local media partners']},
+    {title:'Impact', items:['Baseline survey design','First 10 school engagements','Community forum #1','Impact dashboard scaffold']},
+  ],
+  6: [
+    {title:'Ops', items:['24/7 NOC light','Spare stock & RMA loops','Runner cohort 2 live','Tiered support SLAs']},
+    {title:'Network & Product', items:['Traffic shaping & failover','Billing v2 + loyalty','Zero‑rated edu CDN','Kiosk telemetry']},
+    {title:'Growth', items:['20+ kiosks active','Referral v2 & loyalty tiers','Field events calendar','Creator program']},
+    {title:'Finance', items:['MRR tracking & ARPU tests','Collections & dunning','Capex tracker','Pre‑audit bookkeeping']},
+    {title:'People', items:['Ops leads in districts','Quarterly trainings','Performance ladders','Safety refresh']},
+    {title:'Compliance', items:['Data protection audit','Health data guardrails','SOPs signed','BCP runbook v1']},
+    {title:'Partnerships', items:['NGO contracts','Enterprise pilots','ISP backhaul talks','Media barter']},
+    {title:'Impact', items:['50+ community events','School device drive','Open data snapshot','Impact report H1']},
+  ],
+  12: [
+    {title:'Ops', items:['NOC 1.0','Automated incident mgmt','Spare parts network','Vendor scorecards']},
+    {title:'Network & Product', items:['OneWeb/YahSat expansion plan','Edge caching','App v3 + analytics','Enterprise APIs']},
+    {title:'Growth', items:['200+ ambassadors','Co‑op runner program','Regional partnerships','Channel sales enablement']},
+    {title:'Finance', items:['ARPU ladder v3','Unit eco v2 verified','Grant + credit lines','Audit‑ready books']},
+    {title:'People', items:['Mgr training','Hiring pods','Equity/bonus framework','ESG + ethics training']},
+    {title:'Compliance', items:['ISO-ish controls','DPAs with partners','SOCs & logs','Crisis tabletop exercise']},
+    {title:'Partnerships', items:['Gov MoUs signed','Banking partners','University research links','Hardware vendors slate']},
+    {title:'Impact', items:['500+ school engagements','Community Wi‑Fi zones','Clinic pilots','Annual public report']},
+  ],
+  24: [
+    {title:'Ops', items:['Ops automation','Regional NOCs','Predictive maintenance','Marketplace for spares']},
+    {title:'Network & Product', items:['Multi‑orbit blend','Fiber backhaul (metros)','Smart‑city pilots scale','SDKs for partners']},
+    {title:'Growth', items:['Multi‑city engine','TV/Radio national','Affiliate partners','SME bundles']},
+    {title:'Finance', items:['Debt for infra scale','Rev‑share programs','Insurance matrix','Country P&L']},
+    {title:'People', items:['People ops systems','Leadership bench','L&D tracks','H&S council']},
+    {title:'Compliance', items:['Regional regs matrix','Internal audits','Red‑team tests','BCP drills']},
+    {title:'Partnerships', items:['Carrier deals (x‑border)','IFC/AfDB relations','EdTech alliances','Device OEM partners']},
+    {title:'Impact', items:['2.5M+ roadmap','STEM scholarships','Open data portal','Impact verification']},
+  ]
+};
+
+function renderPhase(h){
+  const root = document.getElementById('phaseCards');
+  root.innerHTML = '';
+  phaseData[h].forEach(block=>{
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `<h3>${block.title}</h3><ul>${block.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    root.appendChild(el);
+  });
+}
+document.getElementById('horizon').addEventListener('change', e=>renderPhase(+e.target.value));
+renderPhase(+document.getElementById('horizon').value);
+
+// -------- Charts --------
+const ctxLine = document.getElementById('line').getContext('2d');
+const ctxDonut = document.getElementById('donut').getContext('2d');
+const ctxBars = document.getElementById('bars').getContext('2d');
+function clearCanvas(ctx){ const c = ctx.canvas; ctx.clearRect(0,0,c.width,c.height); }
+function drawLine(users, mrr){
+  const c = ctxLine.canvas, w = c.width, h = c.height; clearCanvas(ctxLine);
+  const maxY = Math.max(...users, ...mrr)*1.1;
+  const px = i => 20 + i*(w-40)/(users.length-1);
+  const py = v => h-20 - (v/maxY)*(h-40);
+  // grid
+  ctxLine.strokeStyle = '#1e3358'; ctxLine.globalAlpha=.35; ctxLine.beginPath();
+  for(let i=0;i<5;i++){ const y=20+i*(h-40)/4; ctxLine.moveTo(20,y); ctxLine.lineTo(w-20,y); } ctxLine.stroke(); ctxLine.globalAlpha=1;
+  // users
+  ctxLine.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--brand'); ctxLine.lineWidth=2; ctxLine.beginPath();
+  users.forEach((v,i)=>{ const x=px(i), y=py(v); i?ctxLine.lineTo(x,y):ctxLine.moveTo(x,y);}); ctxLine.stroke();
+  // mrr
+  ctxLine.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent'); ctxLine.lineWidth=2; ctxLine.beginPath();
+  mrr.forEach((v,i)=>{ const x=px(i), y=py(v); i?ctxLine.lineTo(x,y):ctxLine.moveTo(x,y);}); ctxLine.stroke();
+}
+function drawDonut(parts){
+  const c=ctxDonut.canvas, w=c.width, h=c.height; clearCanvas(ctxDonut);
+  const cx=w/2, cy=h/2, r=Math.min(w,h)/2-20, total=parts.reduce((a,b)=>a+b,0);
+  let a0=-Math.PI/2; const colors=['#007FFF','#22c55e','#f59e0b'];
+  parts.forEach((v,i)=>{ const a1=a0+2*Math.PI*(v/total);
+    ctxDonut.beginPath(); ctxDonut.moveTo(cx,cy); ctxDonut.fillStyle=colors[i%colors.length];
+    ctxDonut.arc(cx,cy,r,a0,a1); ctxDonut.closePath(); ctxDonut.fill(); a0=a1; });
+  // hole
+  ctxDonut.globalCompositeOperation='destination-out';
+  ctxDonut.beginPath(); ctxDonut.arc(cx,cy,r*0.55,0,2*Math.PI); ctxDonut.fill(); ctxDonut.globalCompositeOperation='source-over';
+}
+function drawBars(vals){
+  const c=ctxBars.canvas, w=c.width, h=c.height; clearCanvas(ctxBars);
+  const max=Math.max(...vals)*1.2; const bw=(w-40)/vals.length;
+  vals.forEach((v,i)=>{ const x=20+i*bw, bh=(v/max)*(h-40); ctxBars.fillStyle=['#007FFF','#22c55e','#f59e0b','#60a5fa','#ef4444'][i%5];
+    ctxBars.fillRect(x, h-20-bh, bw*0.7, bh); });
+}
+
+// Scenarios (users in thousands; month 1..12). Base hits 20k by month 12.
+const scenarios = {
+  base:      { users:[0.8,1.6,2.6,3.8,5.2,6.8,8.6,10.6,12.8,15.2,17.6,20.0], churn:0.035, cac:5.5, planMix:[30,25,45], budget:[48,22,20,7,3] },
+  stretch:   { users:[1.2,2.2,3.6,5.2,7.2,9.6,12.2,15.2,18.6,22.6,26.8,30.0], churn:0.03,  cac:6.5, planMix:[25,25,50], budget:[50,26,15,6,3] },
+  conservative:{ users:[0.5,1.0,1.6,2.4,3.2,4.2,5.4,6.8,8.4,10.2,11.0,12.0], churn:0.05, cac:4.5, planMix:[35,30,35], budget:[44,20,25,8,3] }
+};
+
+function updateMetrics(){
+  const s = scenarios[ document.getElementById('scenario').value ];
+  const arpu = +document.getElementById('arpu').value; document.getElementById('arpuVal').textContent = '$'+arpu;
+  const mrr = s.users.map(u=>u*arpu); // thousands * dollars => $k
+  drawLine(s.users, mrr);
+  drawDonut(s.planMix);
+  drawBars(s.budget);
+  const usersEoM = s.users[s.users.length-1];
+  const cacPayback = (s.cac / Math.max(arpu - 1, 0.01)).toFixed(1) + ' mo';
+  document.getElementById('kUsers').textContent = Intl.NumberFormat().format(Math.round(usersEoM*1000));
+  document.getElementById('kMRR').textContent = '$' + Intl.NumberFormat().format(Math.round(mrr[mrr.length-1]*1000));
+  document.getElementById('kPayback').textContent = cacPayback;
+  document.getElementById('kChurn').textContent = (s.churn*100).toFixed(1) + '%';
+}
+document.getElementById('scenario').addEventListener('change', updateMetrics);
+document.getElementById('arpu').addEventListener('input', updateMetrics);
+updateMetrics();
+
+// ---------- Snapshots (3/6/12 months) ----------
+const snapState = {
+  m3: { users: 2600, arpu: 5, cac: 5.5, planMix:[30,25,45], budget:[48,22,20,7,3] },
+  m6: { users: 6800, arpu: 5, cac: 5.5, planMix:[28,24,48], budget:[48,23,19,7,3] },
+  m12:{ users:20000, arpu: 5, cac: 5.5, planMix:[25,25,50], budget:[50,26,15,6,3] }
+};
+const snapFields = [
+  {k:'users', label:'Users EoM', type:'number', step:100},
+  {k:'arpu', label:'ARPU ($)', type:'number', step:0.1},
+  {k:'cac', label:'CAC ($)', type:'number', step:0.1},
+  {k:'planMix', label:'Plan Mix % (Daily,Weekly,Monthly)', type:'text'},
+  {k:'budget', label:'Budget % (Infra,GTM,Ops,R&D,Buffer)', type:'text'}
+];
+function renderSnap(which){
+  const wrap = document.getElementById('snapWrap'); wrap.innerHTML='';
+  const s = snapState[which];
+  // split into small cards
+  // users/arpu/cac
+  const left = document.createElement('div'); left.className='snap'; left.innerHTML='<h3>'+which.toUpperCase()+'</h3>';
+  ['users','arpu','cac'].forEach(k=>{
+    const lab = document.createElement('label'); lab.textContent = snapFields.find(f=>f.k===k).label;
+    const inp = document.createElement('input'); inp.type='number'; inp.step=snapFields.find(f=>f.k===k).step; inp.value=s[k];
+    inp.addEventListener('input',()=>{ s[k]= +inp.value; });
+    left.appendChild(lab); left.appendChild(inp);
+  });
+  wrap.appendChild(left);
+  // plan mix
+  const mid = document.createElement('div'); mid.className='snap';
+  const lab1 = document.createElement('label'); lab1.textContent='Plan Mix % (Daily,Weekly,Monthly)';
+  const in1 = document.createElement('input'); in1.type='text'; in1.value=s.planMix.join(','); in1.addEventListener('input',()=>{
+    s.planMix = in1.value.split(',').map(x=>+x.trim()).slice(0,3);
+  });
+  mid.appendChild(lab1); mid.appendChild(in1);
+  // budget
+  const lab2 = document.createElement('label'); lab2.textContent='Budget % (Infra,GTM,Ops,R&D,Buffer)';
+  const in2 = document.createElement('input'); in2.type='text'; in2.value=s.budget.join(','); in2.addEventListener('input',()=>{
+    s.budget = in2.value.split(',').map(x=>+x.trim()).slice(0,5);
+  });
+  mid.appendChild(lab2); mid.appendChild(in2);
+  wrap.appendChild(mid);
+  // notes
+  const right = document.createElement('div'); right.className='snap';
+  const notesLab = document.createElement('label'); notesLab.textContent='Notes / Assumptions';
+  const notes = document.createElement('textarea'); notes.rows=8; notes.placeholder='Add any caveats or drivers here…';
+  right.appendChild(notesLab); right.appendChild(notes);
+  wrap.appendChild(right);
+}
+document.querySelectorAll('.snapbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.snapbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); renderSnap(b.dataset.snap);
+}));
+renderSnap('m3');
+
+// Sync from live scenario into current visible snapshot
+document.getElementById('sync').addEventListener('click',()=>{
+  const active = document.querySelector('.snapbtn.active').dataset.snap;
+  const scen = scenarios[ document.getElementById('scenario').value ];
+  const arpu = +document.getElementById('arpu').value;
+  const idx = active==='m3'?2: active==='m6'?5: 11;
+  snapState[active] = {
+    users: Math.round(scen.users[idx]*1000),
+    arpu, cac: scen.cac,
+    planMix: scen.planMix.slice(),
+    budget: scen.budget.slice()
+  };
+  renderSnap(active);
+});
+
+// Export snapshots + live scenario as JSON
+document.getElementById('exportJson').addEventListener('click',()=>{
+  const scenName = document.getElementById('scenario').value;
+  const obj = {
+    brand:'#007FFF', typeface:'Inter/System',
+    liveScenario: scenName,
+    arpuSlider: +document.getElementById('arpu').value,
+    scenarios,
+    snapshots: snapState
+  };
+  const txt = JSON.stringify(obj,null,2);
+  const ta = document.getElementById('jsonOut'); ta.value = txt;
+  // also prompt download
+  const blob = new Blob([txt], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='serpensky_metrics_snapshot.json';
+  a.click(); setTimeout(()=>URL.revokeObjectURL(url), 1500);
+});
+</script>
+</body>
+</html>
